@@ -11,3 +11,8 @@ posts = Post.create([
                       { title: 'Rails is Amazing', body: 'Rails was created by DHH', published: true},
                       { title: 'JIT is Amazing', body: 'Ruby JIT is mainly developed by Takashi', published: false},
                     ])
+
+comments = Comment.create([
+                            { body: 'Ruby is surely amazing', post: posts.first },
+                            { body: 'JIT rocks', post: posts.last}
+                          ])
