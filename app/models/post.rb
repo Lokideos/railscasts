@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  has_many :comments
+
   class << self
 
     # Railscasts 6 - Symbol to_proc
