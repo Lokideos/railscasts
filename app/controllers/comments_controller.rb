@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  layout :user_layout
+
   before_action :set_comment, only: %i[ show edit update destroy ]
 
   # GET /comments or /comments.json
@@ -8,6 +10,9 @@ class CommentsController < ApplicationController
 
   # GET /comments/1 or /comments/1.json
   def show
+    # [Railscasts] #6 overrides all layout settings
+    # render layout: false - render no layout
+    render layout: 'posts'
   end
 
   # GET /comments/new
@@ -57,13 +62,22 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.require(:comment).permit(:body, :post_id)
+  def user_layout
+    if true
+      "admin"
+    else
+      "application"
     end
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def comment_params
+    params.require(:comment).permit(:body, :post_id)
+  end
 end
